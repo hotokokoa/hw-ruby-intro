@@ -65,16 +65,13 @@ def starts_with_consonant? s
 end
 
 def binary_multiple_of_4? s
-  if s.size == 1 && s[0] != '0'
-	 return false
-  end
   for i in 0...s.size
-	 if s[i].to_i != 0 && s[i].to_i != 1
-		return false
-	 end
+    if(s[i]<'0'||s[i]>'9')
+      return false
+    end
   end
-  if s[s.size-1].to_i == 0 && s[s.size-2].to_i == 0
-	return true
+  if ((s.size >= 2 && s[s.size-1] == '0' && s[s.size-2]=='0')||(s.size==1&&s[0]=='0'))
+	 return true
   end
   return false
 end
