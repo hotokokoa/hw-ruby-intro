@@ -79,43 +79,26 @@ end
 # Part 3
 
 class BookInStock
-   def initialize(isbn, price)
-	   if price <= 0 || isbn.size == 0
-		   raise ArgumentError, "Error Detected!!"
-	   end
-
-	   @isbn = isbn
-	   @price = price
-   end
-
-   def price_as_string price
-	   price = price.to_s
-	   location = 0
-	   for i in 0...price.size
-		   if price[i] == '.'
-			   location = price.size - 1 - i
-			   break
-		   end
-	   end
-
-	   if location == 0
-		   final = '$' + price.to_s + '.'
-	   else
-		   final = '$' + price.to_s
-	   end
-
-	   for j in 0...2-location
-		   final = final + '0'
-	   end
-
-	   return final
-   end
-
-   def getter
-	   return price_as_string(@price)
-   end
-
+  def initialize(isbn, price)  
+      if isbn.empty? || price <= 0
+        raise(ArgumentError)
+      end
+      @isbn = isbn
+      @price = price
+  end
+  def isbn= isbn 
+    @isbn = isbn
+  end
+  def price= price
+    @price = price
+  end
+  def isbn
+    @isbn
+  end
+  def price
+    @price
+  end
+  def price_as_string
+    "$%.2f" % self.price
+  end 
 end
-
-book = BookInStock.new('11-29-88', 20)
-puts book.getter
